@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FindTrail</title>
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One&amp;subset=cyrillic" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+    	<head>
+    		<div class="inputs">
+    			<input type="number" name="input_height" class='inputs__input_height' placeholder="Height" max='15'>
+    			<input type="number" name="input_width" class='inputs__input_width' placeholder="Width" max='15'>
+    		</div>
+    		<input type="submit" name="create" class='btn_create' value="Create">
+    	</head>
+    	<div class="osnov hidden">
+    		<nav class = "">
+    			<p>Walls</p>
+    			<div class="nav__walls_btns_container">
+    				<div class="nav__btn_walls_add"><i class="fas fa-plus-square"></i></div>
+
+    				<div class="nav__btn_walls_remove"><i class="fas fa-minus-square"></i></div>
+    			</div>
+    			<p>Player</p>
+    			<div class="nav__player_container">
+    				<div class="nav__btn_player"><i class="fas fa-male"></i></div>
+    			</div>
+    			<p>Finish</p>
+    			<div class="nav__finish_container">
+    				<div class="nav__btn_finish"><i class="far fa-flag"></i></div>
+    			</div>
+    		</nav>
+    		<div class="osnov__wrapper">
+    		</div>
+    	</div>
+      <input type="button" value="Find!" name="btn_find" class="btn_find hidden">
+    </div>
+  </body>
+</html>

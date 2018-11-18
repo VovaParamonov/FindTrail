@@ -1,0 +1,176 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+div {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Poiret One', cursive;
+	background: #47b2ff;
+}
+
+input {
+	font-family: 'Poiret One', cursive;
+	border-style: none;
+	background: none;
+	outline-style: none;
+}
+
+.inputs {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.inputs input {
+	text-align: center;
+	background-color: rgba(255,255,255,0.5);
+	height: 40px;
+	width: 170px;
+	border-radius: 13px;
+	font-weight: bold;
+  	color: white;
+  	letter-spacing: 2px;
+}
+
+.btn_create {
+	border: solid 2px rgba(255,255,255,0.5);
+	width: 200px;
+	height: 25px;
+}
+.btn_create:hover {
+	cursor: pointer;
+	border: solid 2px rgba(255,255,255,0.8);
+}
+
+
+.container {
+	margin: 50px auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	max-width: 60vw;
+
+}
+
+head {
+	display: flex;
+	flex-direction: column;
+}
+
+.inputs {
+	display: flex;
+	justify-content: space-around;
+  width: 60%;
+}
+
+
+
+.btn_create {
+	margin-top: 20px;
+}
+
+.osnov {
+  margin: 0 auto;
+	margin-top: 20px;
+	width: auto;
+  display: flex;
+  transform: translate(-30px);
+  align-items: flex-start;
+}
+
+td {
+  border: solid 0.5px #47b2ff;
+  width: 60px;
+  height: 60px;
+  box-shadow: 1px 1px 0.4px grey;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 40px;
+}
+
+nav {
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+	border-radius: 10px;
+	font-size: 25px;
+	padding: 5px;
+  width: 60px;
+  height: auto;
+}
+
+nav input {
+  width: 40%;
+  background-color: red;
+}
+
+.osnov__wrapper {
+  margin-left: 10px;
+	background-color: white;
+  display: inline-block;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.nav__walls_btns_container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav__btn_walls_add, .nav__btn_walls_remove {
+  cursor: pointer;
+  text-shadow: 2px 2px 1px gray;
+}
+.nav__btn_player {
+  cursor: pointer;
+  text-shadow: 2px 2px 1px gray;
+}
+.nav__btn_finish {
+  cursor: pointer;
+  text-shadow: 2px 2px 1px gray;
+}
+
+.nav__player_container {
+  display: flex;
+  justify-content: center;
+}
+.nav__finish_container {
+  display: flex;
+  justify-content: center;
+}
+.btn_find {
+  border: solid 2px rgba(255,255,255,0.5);
+  width: 200px;
+  height: 25px;
+  margin-top: 15px;
+}
+
+.btn_find:hover {
+	cursor: pointer;
+	border: solid 2px rgba(255,255,255,0.8);
+}
+
+
+.hidden {
+  display: none;
+}
+
+.td_wall {
+  background: black;
+}
+.td_trail {
+  background-color: rgba(109, 249, 27, 0.4);
+}
+
+.td_ready:hover {
+
+  transform: scale(0.96);
+}
+
+.btn_active {
+  color: #6DF91B;
+}
