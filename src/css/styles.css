@@ -10,6 +10,7 @@ div {
 body {
 	font-family: 'Poiret One', cursive;
 	background: #47b2ff;
+    overflow-x: auto;
 }
 
 .info {
@@ -57,11 +58,12 @@ input {
 
 
 .container {
-	margin: 50px auto;
+	margin: 50px 50px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	max-width: 90vw;
+	/*max-width: 90vw;*/
+    width: auto;
 }
 
 head {

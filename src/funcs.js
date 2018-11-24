@@ -42,12 +42,12 @@ export function arr_create(height, width) {
 }
 
 export function findTrail(arr) {
-  var bool = true;
-  var change;
+  let bool = true;
+  let change;
   while (bool){
     change = false;
-    for (var i=0;i < arr.length; i++){
-      for (var k=0;k < arr[0].length; k++){
+    for (let i=0;i < arr.length; i++){
+      for (let k=0;k < arr[0].length; k++){
         if (arr[i][k] != 0 && arr[i][k] != -1 && arr[i][k] != -3) {
           var val = arr[i][k];
           if (i > 0) {
@@ -104,8 +104,16 @@ export function findTrail(arr) {
  //----Построение обратного пути-------
   if (change == true) {
     bool = true;
-    var posRow = finishRow;
-    var posCol = finishCol;
+    let posRow;
+    let posCol;
+    arr.forEach(function(item, i){
+      item.forEach(function(item_k, k){
+        if(item_k == -3){
+          posRow = i;
+          posCol = k;
+        }
+        })
+    })
     val++;
     while(bool){
       if (posRow > 0) {
