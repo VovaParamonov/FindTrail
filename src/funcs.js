@@ -101,7 +101,7 @@ export function findTrail(arr) {
       bool = false;
     }
   }
-
+ //----Построение обратного пути-------
   if (change == true) {
     bool = true;
     var posRow = finishRow;
@@ -155,4 +155,49 @@ export function findTrail(arr) {
     }
   }
   return arr;
+}
+
+export function step(arr){
+  var posRow;
+  var posCol;
+
+  arr.forEach(function(item, i){
+    item.forEach(function(item_k, k){
+      if (item_k == 1){
+        posRow = i;
+        posCol = k;
+      }
+    })
+  })
+
+  if (posRow > 0) {
+    if (arr[posRow-1][posCol] == -4) {
+      arr[posRow][posCol] = 0;
+      arr[posRow-1][posCol] = 1;
+      return arr;
+    }
+  }
+  if (posCol < arr[0].length-1) {
+    if (arr[posRow][posCol+1] == -4) {
+      arr[posRow][posCol] = 0;
+      arr[posRow][posCol+1] = 1;
+      return arr;
+    }
+  }
+  if (posRow < arr.length-1) {
+    if (arr[posRow + 1][posCol] == -4) {
+      arr[posRow][posCol] = 0;
+      arr[posRow+1][posCol] = 1;
+      return arr;
+    }
+  }
+  if (posCol > 0) {
+    if (arr[posRow][posCol-1] == -4) {
+      arr[posRow][posCol] = 0;
+      arr[posRow][posCol-1] = 1;
+      return arr;
+    }
+  }
+
+  return 'Finish';
 }

@@ -1,6 +1,6 @@
 import $ from "jquery";
-import {arr_create, setStartPos, setFinishPos, arrReset, findTrail} from './funcs.js';
-
+import {arr_create, setStartPos, setFinishPos, arrReset, findTrail, step} from './funcs.js';
+import {arrSave, arrLoad, setCookies, getCookies} from "./api.js";
 
 //---------Переменные---------------
 var $input_height = $('.inputs__input_height');
@@ -14,8 +14,17 @@ var $btn_walls_remove = $('.nav__btn_walls_remove');
 var $btn_player = $('.nav__btn_player');
 var $btn_finish = $('.nav__btn_finish');
 var $btn_find = $('.btn_find');
+var $btn_ajax_load = $('.btn_ajax_load');
+var $btn_ajax_save = $('.btn_ajax_save');
+var $btn_cookies_save = $('.btn_cookie_save');
+var $btn_cookies_load = $('.btn_cookie_load');
+var $checkbox = $('.checkbox_goes');
+var $slider_osnov = $('.slider_osnov');
+var $slider_hand = $('.slider_hand');
+var $slider_fill = $('.slider_fill');
 
 var arr_field = [[]];
+var speed = 50;
 
 //--------Активность модификаций-------
 var btn_walls_add_active =false;
@@ -23,7 +32,25 @@ var btn_walls_remove_active = false;
 var btn_player_active = false;
 var btn_finish_active = false;
 
+var addingWall = false;
+var removingWall = false;
+
+var slider_active = false;
 //----------------Функции----------------
+
+function slider_move(pos1, pos2){
+  if (pos2 - pos1 < -8 && parseInt($slider_fill.css('height'))>=15){
+      $slider_fill.attr("data-val", Number($slider_fill.attr("data-val"))+1);
+      $slider_fill.css('height', parseInt($slider_fill.css('height'))-10+'%');
+      document.mouse_posY1 = pos2;
+  } else if (pos2 - pos1 > 8 && parseInt($slider_fill.css('height'))<90) {
+    $slider_fill.attr("data-val", Number($slider_fill.attr("data-val"))-1);
+    $slider_fill.css('height', parseInt($slider_fill.css('height'))+10+'%');
+    document.mouse_posY1 = pos2;
+  }
+}
+
+
 function field_drow (arr) {
   var $table = $('<table>');
 
@@ -63,12 +90,61 @@ function btnsDeactivated(){
 }
 
 //--------------Обработчики--------------
+
+$slider_hand.on("mousedown", function(eventObj){
+  slider_active = true;
+  document.mouse_posY1 = eventObj.pageY;
+})
+
+$btn_cookies_save.on('click', function(){
+  setCookies('arr1', JSON.stringify(arr_field));
+  $btn_cookies_save.addClass('btn_done');
+  setTimeout(function(){
+    $btn_cookies_save.removeClass('btn_done');
+  },500);
+});
+
+$btn_cookies_load.on('click', function(){
+  if (getCookies('arr1')){
+    $btn_cookies_load.addClass('btn_done');
+    setTimeout(function(){
+      $btn_cookies_load.removeClass('btn_done');
+    },500);
+    arr_field = getCookies('arr1');
+    field_drow(arr_field);
+  } else {
+    $btn_cookies_load.addClass('btn_fail');
+    setTimeout(function(){
+      $btn_cookies_load.removeClass('btn_fail');
+    },500);
+  }
+
+})
+
+$btn_ajax_load.on('click', function(eventObj){
+  $osnov.removeClass('hidden');
+  $btn_find.removeClass('hidden');
+  arrLoad('1', function(result){
+    arr_field = result;
+    field_drow (arr_field);
+    $('.info').addClass('hidden');
+  })
+})
+
+$btn_ajax_save.on('click', function(eventObj){
+  arrSave(arr_field, '1', function(result){
+    alert(result);
+  })
+})
+
+
 $btn_crate.on('click', function(){
   if (($input_height.val() > 0) && ($input_width.val() >0) ){
     $osnov.removeClass('hidden');
     $btn_find.removeClass('hidden');
     arr_field = arr_create($input_height.val(), $input_width.val());
     field_drow (arr_field);
+    $('.info').addClass('hidden');
   }
 });
 
@@ -124,6 +200,20 @@ $btn_finish.on('click', function(){
   }
 });
 
+$checkbox.change(function(){
+  if ($checkbox.attr('data-val') == "true"){
+    $checkbox.attr('data-val', 'false');
+  } else {
+    $checkbox.attr('data-val', 'true');
+  }
+  if ($slider_osnov.attr('style') == 'display: none;'){
+    $slider_osnov.slideDown(300);
+  } else {
+    $slider_osnov.slideUp(300);
+  }
+
+})
+
 $btn_find.on('click', function(){
   var startResult = -1;
   var finishResult = -1;
@@ -142,22 +232,58 @@ $btn_find.on('click', function(){
   } else {
     arr_field = findTrail(arr_field);
     field_drow(arr_field);
-    arr_field = arrReset(arr_field);
+    if ($checkbox.attr("data-val") == "true"){
+      var timerID = setInterval(function(){
+        var step_result = step(arr_field);
+        if (typeof(step_result) == 'object'){
+            arr_field = step_result;
+            field_drow(arr_field);
+        } else {
+          clearInterval(timerID);
+          arr_field = arrReset(arr_field);
+          field_drow(arr_field);
+        }
+      }, speed*10/parseInt($slider_fill.attr('data-val')));
+    } else {
+      arr_field = arrReset(arr_field);
+    }
   }
 })
 
-$table_wrapper.on('click', 'td', function(){
-  if (btn_walls_add_active == true) {
+$(document).on('mouseup', function(){
+  addingWall = false;
+  removingWall = false;
+  slider_active = false;
+})
+
+$(document).mousemove(function(eventObj){
+  if (slider_active){
+    slider_move(document.mouse_posY1 ,eventObj.pageY);
+    //console.log(document.mouse_posY1, eventObj.pageY);
+  }
+})
+
+$table_wrapper.on('mouseup', function(){
+  addingWall = false;
+  removingWall = false;
+});
+
+$table_wrapper.delegate('td','mousemove',function(){
+  if (addingWall == true) {
     var row = parseInt($(this).attr('data-row'));
     var col = parseInt($(this).attr('data-col'));
     arr_field[row][col] = -1;
     field_drow(arr_field);
-  } else if (btn_walls_remove_active == true) {
+  } else if (removingWall == true) {
     var row = parseInt($(this).attr('data-row'));
     var col = parseInt($(this).attr('data-col'));
     arr_field[row][col] = 0;
     field_drow(arr_field);
-  } else if (btn_player_active == true){
+  }
+})
+
+$table_wrapper.on('click', 'td', function(){
+  if (btn_player_active == true){
     var row = parseInt($(this).attr('data-row'));
     var col = parseInt($(this).attr('data-col'));
 
@@ -192,6 +318,21 @@ $table_wrapper.on('click', 'td', function(){
   }
 })
 
+$table_wrapper.on('mousedown', 'td', function(){
+  if (btn_walls_add_active == true) {
+    var row = parseInt($(this).attr('data-row'));
+    var col = parseInt($(this).attr('data-col'));
+    arr_field[row][col] = -1;
+    field_drow(arr_field);
+    addingWall = true;
+  } else if (btn_walls_remove_active == true) {
+    var row = parseInt($(this).attr('data-row'));
+    var col = parseInt($(this).attr('data-col'));
+    arr_field[row][col] = 0;
+    field_drow(arr_field);
+    removingWall = true;
+  }
+})
 
 
 

@@ -12,6 +12,15 @@ body {
 	background: #47b2ff;
 }
 
+.info {
+  position: absolute;
+  display: block;
+  left: 40px;
+  color: white;
+  top: 40px;
+  opacity: 0.7;
+}
+
 input {
 	font-family: 'Poiret One', cursive;
 	border-style: none;
@@ -52,8 +61,7 @@ input {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	max-width: 60vw;
-
+	max-width: 90vw;
 }
 
 head {
@@ -64,7 +72,7 @@ head {
 .inputs {
 	display: flex;
 	justify-content: space-around;
-  width: 60%;
+  width: 30%;
 }
 
 
@@ -105,13 +113,13 @@ nav {
 
 nav input {
   width: 40%;
-  background-color: red;
+
 }
 
 .osnov__wrapper {
   margin-left: 10px;
 	background-color: white;
-  display: inline-block;
+
   padding: 8px;
   border-radius: 10px;
 }
@@ -173,4 +181,100 @@ nav input {
 
 .btn_active {
   color: #6DF91B;
+}
+
+.btn_ajax_load {
+  border: 2px solid red;
+  width: 100%;
+}
+
+.btn_ajax_save {
+  border: 2px solid red;
+  width: 100%;
+}
+
+.btn_cookie_save, .btn_cookie_load {
+  font-size: 20px;
+  width: 100%;
+  cursor: pointer;
+  height: 100%;
+  transition: all 0.4s;
+}
+
+
+.nav__cookies_btn_container div {
+  background: rgba(148, 148, 148, 0.3);
+  height: 40px;
+  margin: 10px auto;
+  border-radius: 8px;
+  transition: all 0.4s;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.nav__cookies_btn_container div:hover {
+  background: rgba(148, 148, 148, 0.6);
+}
+
+.btn_done {
+  background-color: rgba(32, 224, 16, 0.6);
+}
+
+.btn_fail {
+  background-color: rgba(247, 2, 2, 0.6);
+}
+
+.checkbox_goes {
+  width: 60px;
+  height: 30px;
+}
+
+.slider_wrapper {
+  width: 30px;
+  height: 100px;
+  margin: 5px auto;
+}
+
+.slider_osnov {
+  width: 4px;
+  height: 100%;
+  overflow: visible;
+  background-color: #989898;
+  border-radius: 5px;
+  margin: auto;
+}
+
+.slider_fill{
+  width: 100%;
+  height: 50%;
+  background-color: #D1D1D1;
+
+}
+
+.slider_hand {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  border-radius: 8px;
+  background-color: #646464;
+  top: 0%;
+  transform: translate(-40%, -50%);
+}
+
+
+@media screen and (max-width: 1080px) {
+  .container {
+    transform-origin: center;
+    transform: scale(2) translateX(-9vw) translateY(25%);
+    position: absolute;
+    left: 50%;
+
+  }
+  .inputs {
+    width: 400px;
+  }
+  .info {
+    transform: scale(2) translateX(30%);
+    top: 350px;
+  }
 }

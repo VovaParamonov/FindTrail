@@ -9,7 +9,7 @@
     <div class="container">
     	<head>
     		<div class="inputs">
-    			<input type="number" name="input_height" class='inputs__input_height' placeholder="Height" max='15'>
+    			<input type="number" name="input_height" class='inputs__input_height' placeholder="Height" max="15">
     			<input type="number" name="input_width" class='inputs__input_width' placeholder="Width" max='15'>
     		</div>
     		<input type="submit" name="create" class='btn_create' value="Create">
@@ -30,11 +30,38 @@
     			<div class="nav__finish_container">
     				<div class="nav__btn_finish"><i class="far fa-flag"></i></div>
     			</div>
+          <div class="nav__cookies_btn_container">
+            <div class="nav__btn_save">
+              <input type="submit" class="btn_cookie_save" value="save">
+            </div>
+
+            <div class="nav__btn_load">
+              <input type="submit" class="btn_cookie_load" value="Load">
+            </div>
+          </div>
+          <div class="nav__checkbox_container">
+            <input type="checkbox" class="checkbox_goes" checked="checked" data-val="true" />
+          </div>
+          <div class="slider_wrapper">
+            <div class="slider_osnov">
+              <div class="slider_fill" data-val="5">
+
+              </div>
+              <div class="slider_hand"></div>
+            </div>
+          </div>
     		</nav>
     		<div class="osnov__wrapper">
     		</div>
     	</div>
       <input type="button" value="Find!" name="btn_find" class="btn_find hidden">
     </div>
+  <div class="info">
+    <h1>Instruction</h1>
+    <p>1. Create a field for the specified parameters.</br>
+2. Outline the map using walls.</br>
+3. Set the start and finish positions</br>
+4. Click the 'Find' button to find the path.<p>
+  </div>
   </body>
 </html>
