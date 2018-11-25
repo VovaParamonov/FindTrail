@@ -341,9 +341,9 @@ $table_wrapper.on('mousedown', 'td', function(){
   }
 })
 
-$(document).scroll(function(){
-  $nav.css('transform', 'translateY('+($(document).scrollTop())+'px)')
-})
+// $(document).scroll(function(){
+//   $nav.css('transform', 'translateY('+($(document).scrollTop())+'px)')
+// })
 
 //----Аналог для сенсора------
 // $table_wrapper.on('ontouchstart', 'td', function(){
@@ -378,8 +378,6 @@ $(document).scroll(function(){
 //         removingWall = true;
 //     }
 // })
-
-
 
 //-------------Обозначения для массива поля-----------
 /*
