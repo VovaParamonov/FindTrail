@@ -13,7 +13,6 @@ var $btn_walls_add = $('.nav__btn_walls_add');
 var $btn_walls_remove = $('.nav__btn_walls_remove');
 var $btn_player = $('.nav__btn_player');
 var $btn_finish = $('.nav__btn_finish');
-var $btn_find = $('.btn_find');
 var $btn_ajax_load = $('.btn_ajax_load');
 var $btn_ajax_save = $('.btn_ajax_save');
 var $btn_cookies_save = $('.btn_cookie_save');
@@ -22,6 +21,7 @@ var $checkbox = $('.checkbox_goes');
 var $slider_osnov = $('.slider_osnov');
 var $slider_hand = $('.slider_hand');
 var $slider_fill = $('.slider_fill');
+var $nav = $('nav');
 
 var arr_field = [[]];
 var speed = 50;
@@ -36,6 +36,8 @@ var addingWall = false;
 var removingWall = false;
 
 var slider_active = false;
+
+var go_active = false;
 //----------------Функции----------------
 
 function slider_move(pos1, pos2){
@@ -215,6 +217,9 @@ $checkbox.change(function(){
 })
 
 $btn_find.on('click', function(){
+  if (go_active){
+    return;
+  }
   var startResult = -1;
   var finishResult = -1;
   arr_field.forEach(function(item, i){
@@ -233,6 +238,7 @@ $btn_find.on('click', function(){
     arr_field = findTrail(arr_field);
     field_drow(arr_field);
     if ($checkbox.attr("data-val") == "true"){
+      go_active = true;
       var timerID = setInterval(function(){
         var step_result = step(arr_field);
         if (typeof(step_result) == 'object'){
@@ -242,6 +248,7 @@ $btn_find.on('click', function(){
           clearInterval(timerID);
           arr_field = arrReset(arr_field);
           field_drow(arr_field);
+          go_active = false;
         }
       }, speed*10/parseInt($slider_fill.attr('data-val')));
     } else {
@@ -332,6 +339,10 @@ $table_wrapper.on('mousedown', 'td', function(){
     field_drow(arr_field);
     removingWall = true;
   }
+})
+
+$(document).scroll(function(){
+  $nav.css('transform', 'translateY('+($(document).scrollTop())+'px)')
 })
 
 //----Аналог для сенсора------
