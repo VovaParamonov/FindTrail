@@ -334,6 +334,22 @@ $table_wrapper.on('mousedown', 'td', function(){
   }
 })
 
+//----Аналог для сенсора------
+// $table_wrapper.on('touchstart', 'td', function(){
+//     if (btn_walls_add_active == true) {
+//         var row = parseInt($(this).attr('data-row'));
+//         var col = parseInt($(this).attr('data-col'));
+//         arr_field[row][col] = -1;
+//         field_drow(arr_field);
+//     } else if (btn_walls_remove_active == true) {
+//         var row = parseInt($(this).attr('data-row'));
+//         var col = parseInt($(this).attr('data-col'));
+//         arr_field[row][col] = 0;
+//         field_drow(arr_field);
+//         removingWall = true;
+//     }
+// })
+
 
 
 //-------------Обозначения для массива поля-----------
