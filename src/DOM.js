@@ -335,7 +335,7 @@ $table_wrapper.on('mousedown', 'td', function(){
 })
 
 //----Аналог для сенсора------
-// $table_wrapper.on('touchstart', 'td', function(){
+// $table_wrapper.on('ontouchstart', 'td', function(){
 //     if (btn_walls_add_active == true) {
 //         var row = parseInt($(this).attr('data-row'));
 //         var col = parseInt($(this).attr('data-col'));
@@ -344,6 +344,24 @@ $table_wrapper.on('mousedown', 'td', function(){
 //     } else if (btn_walls_remove_active == true) {
 //         var row = parseInt($(this).attr('data-row'));
 //         var col = parseInt($(this).attr('data-col'));
+//         arr_field[row][col] = 0;
+//         field_drow(arr_field);
+//         removingWall = true;
+//     }
+// })
+//
+// $table_wrapper.on('touchmove', function(eventObj){
+//     $(eventObj.target).trigger('ontouchstart');
+//     console.log(12312)
+//
+//     if (btn_walls_add_active == true) {
+//         var row = parseInt($(eventObj.target).attr('data-row'));
+//         var col = parseInt($(eventObj.target).attr('data-col'));
+//         arr_field[row][col] = -1;
+//         field_drow(arr_field);
+//     } else if (btn_walls_remove_active == true) {
+//         var row = parseInt($(eventObj.target).attr('data-row'));
+//         var col = parseInt($(eventObj.target).attr('data-col'));
 //         arr_field[row][col] = 0;
 //         field_drow(arr_field);
 //         removingWall = true;
