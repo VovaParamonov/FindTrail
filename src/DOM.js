@@ -389,5 +389,3 @@ $(document).scroll(function(){
 -3 = финиш
 
 */
-
-// Тест git
