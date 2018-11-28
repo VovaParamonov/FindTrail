@@ -341,6 +341,65 @@ $table_wrapper.on('mousedown', 'td', function(){
   }
 })
 
+
+$(document).keydown(function(eventObj){
+
+  let posX;
+  let posY;
+  let existence = false;
+
+  arr_field.forEach((item, i) => {item.forEach((item_k, k) => {
+    if (item_k == 1){
+      posX = k;
+      posY = i;
+      existence = true;
+    }
+  })});
+
+  if (arr_field != '' && existence){
+      switch(eventObj.which){
+          case 37:
+            if (posX > 0) {
+                if (arr_field[posY][posX - 1] == 0 || arr_field[posY][posX - 1] == -3 || arr_field[posY][posX - 1] == -4) {
+                    arr_field[posY][posX] = 0;
+                    arr_field[posY][posX - 1] = 1;
+                    field_drow(arr_field);
+                }
+            }
+            break;
+          case 38:
+            if (posY > 0) {
+                if (arr_field[posY - 1][posX] == 0 || arr_field[posY - 1][posX] == -3 || arr_field[posY - 1][posX] == -4) {
+                    arr_field[posY][posX] = 0;
+                    arr_field[posY - 1][posX] = 1;
+                    field_drow(arr_field);
+                }
+            }
+            break;
+          case 39:
+            if (posX < arr_field[0].length) {
+                if (arr_field[posY][posX + 1] == 0 || arr_field[posY][posX + 1] == -3 || arr_field[posY][posX + 1] == -4) {
+                    arr_field[posY][posX] = 0;
+                    arr_field[posY][posX + 1] = 1;
+                    field_drow(arr_field);
+                }
+            }
+            break;
+          case 40:
+            if (posY < arr_field.length-1) {
+                if (arr_field[posY + 1][posX] == 0 || arr_field[posY + 1][posX] == -3 || arr_field[posY + 1][posX] == -4) {
+                    arr_field[posY][posX] = 0;
+                    arr_field[posY + 1][posX] = 1;
+                    field_drow(arr_field);
+                }
+            }
+            break;
+      }
+  }
+
+})
+
+$('body').attr('onwheel', 'return false');
 // $(document).scroll(function(){
 //   $nav.css('transform', 'translateY('+($(document).scrollTop())+'px)')
 // })
