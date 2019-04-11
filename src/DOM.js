@@ -399,7 +399,8 @@ $(document).keydown(function(eventObj){
 
 })
 
-$('body').attr('onwheel', 'return false');
+// $('body').attr('onwheel', 'return false');
+
 // $(document).scroll(function(){
 //   $nav.css('transform', 'translateY('+($(document).scrollTop())+'px)')
 // })
